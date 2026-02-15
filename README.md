@@ -75,3 +75,16 @@ Notes:
 - If `manifest.json` fails to load or is invalid, the game logs a warning and uses built-in hardcoded defaults.
 - If `game-config.json` fails to load or is invalid, the game logs a warning and keeps built-in runtime defaults.
 - If any asset key is missing in `manifest.assets`, that specific asset falls back to its local bundled path.
+
+### Backoffice publish sync
+
+Use this to delete old published theme files and copy a fresh backoffice export (1-for-1 replacement):
+
+```bash
+npm run sync:theme -- --from /path/to/backoffice-export --theme SpinSlotSpin
+```
+
+Expected source layout under `--from`:
+- `manifest.json`
+- `game-config.json` (optional but recommended)
+- `assets/*`

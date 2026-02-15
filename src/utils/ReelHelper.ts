@@ -56,6 +56,14 @@ export function emptyAllReels(): void {
 }
 
 export function getSymbolFrames(symbol: string): any {
+    // Per-symbol runtime asset override from manifest keys:
+    // high-tier-symbol-1/2/3, mid-tier-symbol-1/2/3, low-tier-symbol-1/2/3
+    // This must run before strip resolution so partial symbol updates are visible.
+    const staticSymbolTexture = Assets.get(`symbol_${symbol}`) as Texture | undefined;
+    if (staticSymbolTexture) {
+        return [staticSymbolTexture];
+    }
+
     const stripFrameMap: Record<string, { key: string; group: number }> = {
         H1: { key: "high_symbol_strip", group: 0 },
         H2: { key: "high_symbol_strip", group: 1 },

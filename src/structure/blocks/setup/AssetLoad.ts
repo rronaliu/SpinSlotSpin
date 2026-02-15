@@ -3,13 +3,16 @@ import { Block } from "../../Block";
 import { GAME } from "../../../GAME";
 import { XContainer } from "../../../pixi/XContainer";
 import { TGraphics } from "../../../pixi/TGraphics";
-import { getThemeAssetUrl } from "../../../theme/runtimeTheme";
+import { getThemeAssetUrl, resolveThemeAssetUrl } from "../../../theme/runtimeTheme";
 
 const assetUrl = (path: string): string =>
   new URL(`../../../assets/${path}`, import.meta.url).href;
 
 const resolveAssetUrl = (keys: string[], fallbackPath: string): string =>
-  getThemeAssetUrl(...keys) ?? assetUrl(fallbackPath);
+  resolveThemeAssetUrl(keys, fallbackPath) ?? assetUrl(fallbackPath);
+
+const resolveThemeOnlyAssetUrl = (keys: string[]): string | undefined =>
+  getThemeAssetUrl(...keys);
 
 export class AssetLoad extends Block {
   private progressBar!: TGraphics;
@@ -35,41 +38,109 @@ export class AssetLoad extends Block {
   }
 
   private async _loadAssets(): Promise<void> {
-    Assets.addBundle("all-assets", {
+    const symbolH1 = resolveThemeOnlyAssetUrl(["high-tier-symbol-1"]);
+    const symbolH2 = resolveThemeOnlyAssetUrl(["high-tier-symbol-2"]);
+    const symbolH3 = resolveThemeOnlyAssetUrl(["high-tier-symbol-3"]);
+    const symbolM1 = resolveThemeOnlyAssetUrl(["mid-tier-symbol-1"]);
+    const symbolM2 = resolveThemeOnlyAssetUrl(["mid-tier-symbol-2"]);
+    const symbolM3 = resolveThemeOnlyAssetUrl(["mid-tier-symbol-3"]);
+    const symbolL1 = resolveThemeOnlyAssetUrl(["low-tier-symbol-1"]);
+    const symbolL2 = resolveThemeOnlyAssetUrl(["low-tier-symbol-2"]);
+    const symbolL3 = resolveThemeOnlyAssetUrl(["low-tier-symbol-3"]);
+
+    const bundle = {
       intro_BG: resolveAssetUrl(
-        ["intro_BG", "introBg", "samurai-spin-intro-bg.png"],
+        ["loading-page", "intro_BG", "introBg", "samurai-spin-intro-bg.png"],
         "images/samurai-spin-intro-bg.png"
       ),
       dungeon_BG: resolveAssetUrl(
-        ["dungeon_BG", "dungeonBg", "samurai_BG.png"],
+        ["background", "dungeon_BG", "dungeonBg", "samurai_BG.png"],
         "images/samurai_BG.png"
       ),
       game_logo: resolveAssetUrl(
-        ["game_logo", "gameLogo", "samurai-game-logo.png"],
+        ["game-logo", "game_logo", "gameLogo", "samurai-game-logo.png"],
         "images/samurai-game-logo.png"
       ),
       game_frame: resolveAssetUrl(
-        ["game_frame", "gameFrame", "Reel-Background.png"],
+        ["reel-container", "game_frame", "gameFrame", "Reel-Background.png"],
         "images/Reel-Background.png"
       ),
       reel_background: resolveAssetUrl(
-        ["reel_background", "reelBackground", "Reel-Background-620.png"],
+        ["reel-container", "reel_background", "reelBackground", "Reel-Background-620.png"],
         "images/Reel-Background-620.png"
       ),
 
       high_symbol_strip: resolveAssetUrl(
-        ["high_symbol_strip", "highSymbolStrip", "high-symbol-spritesheet.png"],
+        [
+          "spritesheet",
+          "high_symbol_strip",
+          "highSymbolStrip",
+          "high-symbol-spritesheet.png"
+        ],
         "spritesheets/high-symbol/high-symbol-spritesheet.png"
       ),
       mid_symbol_strip: resolveAssetUrl(
-        ["mid_symbol_strip", "midSymbolStrip", "mid-symbol-spritesheet.png"],
+        [
+          "spritesheet",
+          "mid_symbol_strip",
+          "midSymbolStrip",
+          "mid-symbol-spritesheet.png"
+        ],
         "spritesheets/mid-symbol/mid-symbol-spritesheet.png"
       ),
       low_symbol_strip: resolveAssetUrl(
-        ["low_symbol_strip", "lowSymbolStrip", "low-symbol-spritesheet.png"],
+        [
+          "spritesheet",
+          "low_symbol_strip",
+          "lowSymbolStrip",
+          "low-symbol-spritesheet.png"
+        ],
         "spritesheets/low-symbol/low-symbol-spritesheet.png"
-      )
-    });
+      ),
+      ...(symbolH1 ? { symbol_H1: symbolH1 } : {}),
+      ...(symbolH2 ? { symbol_H2: symbolH2 } : {}),
+      ...(symbolH3 ? { symbol_H3: symbolH3 } : {}),
+      ...(symbolM1 ? { symbol_M1: symbolM1 } : {}),
+      ...(symbolM2 ? { symbol_M2: symbolM2 } : {}),
+      ...(symbolM3 ? { symbol_M3: symbolM3 } : {}),
+      ...(symbolL1 ? { symbol_L1: symbolL1 } : {}),
+      ...(symbolL2 ? { symbol_L2: symbolL2 } : {}),
+      ...(symbolL3 ? { symbol_L3: symbolL3 } : {})
+    };
+
+    const replaceableKeys = [
+      "intro_BG",
+      "dungeon_BG",
+      "game_logo",
+      "game_frame",
+      "reel_background",
+      "high_symbol_strip",
+      "mid_symbol_strip",
+      "low_symbol_strip",
+      "symbol_H1",
+      "symbol_H2",
+      "symbol_H3",
+      "symbol_M1",
+      "symbol_M2",
+      "symbol_M3",
+      "symbol_L1",
+      "symbol_L2",
+      "symbol_L3"
+    ];
+
+    // 1-for-1 replacement: unload previous assets before importing replacements.
+    try {
+      await Assets.unload(replaceableKeys);
+    } catch {
+      // no-op, keys may not exist yet
+    }
+
+    const assetsApi = Assets as unknown as {
+      removeBundle?: (bundleId: string) => void;
+    };
+    assetsApi.removeBundle?.("all-assets");
+
+    Assets.addBundle("all-assets", bundle);
 
     // Load assets with progress tracking
     await Assets.loadBundle("all-assets", (progress: number) => {

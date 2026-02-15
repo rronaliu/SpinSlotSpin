@@ -5,7 +5,7 @@ import faviconUrl from './assets/images/samurai-game-logo.png';
 import { applyRuntimeGameConfig, startGame } from './GAME';
 import {
   getRuntimeThemeConfig,
-  getThemeAssetUrl,
+  resolveThemeAssetUrl,
   loadRuntimeTheme
 } from './theme/runtimeTheme';
 
@@ -17,7 +17,10 @@ if (import.meta.hot) {
 
 const setFavicon = (): void => {
   const resolvedFavicon =
-    getThemeAssetUrl('favicon', 'game_logo', 'samurai-game-logo.png') ?? faviconUrl;
+    resolveThemeAssetUrl(
+      ['game-logo', 'favicon', 'game_logo', 'samurai-game-logo.png'],
+      'images/samurai-game-logo.png'
+    ) ?? faviconUrl;
 
   const existingFavicon = document.querySelector("link[rel='icon']") as HTMLLinkElement | null;
   if (existingFavicon) {
