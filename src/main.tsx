@@ -18,7 +18,7 @@ if (import.meta.hot) {
 const setFavicon = (): void => {
   const resolvedFavicon =
     resolveThemeAssetUrl(
-      ['game-logo', 'favicon', 'game_logo', 'samurai-game-logo.png'],
+      ['game-logo', 'favicon'],
       'images/samurai-game-logo.png'
     ) ?? faviconUrl;
 

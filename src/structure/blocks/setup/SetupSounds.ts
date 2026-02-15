@@ -39,30 +39,30 @@ export class SetupSounds extends Block {
             
             // BUTTON SFX
             upsertSound('UI-pick', resolveAssetUrl(
-                ['UI-pick', 'uiPick', 'BUTTON_12.wav'],
+                ['UI-pick', 'uiPick'],
                 'audio/SFX/BUTTON_12.wav'
             ), 0.01);
 
             //MUSIC
             upsertSound('music-1', resolveAssetUrl(
-                ['music-1', 'music1', 'trap-music-med.mp3'],
+                ['music-1', 'music1'],
                 'audio/music/trap-music-med.mp3'
             ), 0.1);
 
             //REEL SFX
             upsertSound('reel-thud', resolveAssetUrl(
-                ['reel-thud', 'reelThud', 'light-thud-super-low.mp3'],
+                ['reel-thud', 'reelThud'],
                 'audio/SFX/light-thud-super-low.mp3'
             ), 0.6);
 
             // GAME EVENTS
             upsertSound('coin-count-loop', resolveAssetUrl(
-                ['coin-count-loop', 'coinCountLoop', 'coin-loop-detuned.wav'],
+                ['coin-count-loop', 'coinCountLoop'],
                 'audio/SFX/coin-loop-detuned.wav'
             ), 0.05);
 
             upsertSound('coin-flung', resolveAssetUrl(
-                ['coin-flung', 'coinFlung', 'coin-flung-med.mp3'],
+                ['coin-flung', 'coinFlung'],
                 'audio/SFX/coin-flung-med.mp3'
             ), 0.2);
 

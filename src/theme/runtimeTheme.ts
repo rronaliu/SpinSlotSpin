@@ -10,6 +10,7 @@ const ASSET_CACHE_KEY = "theme-assets-cache:SpinSlotSpin";
 
 let runtimeManifest: ThemeManifest | null = null;
 let runtimeConfig: RuntimeThemeConfig | null = null;
+let latestManifestAssets: Record<string, string> = {};
 
 const normalizeAssetRef = (value: string): string =>
   value.replace(/\\/g, "/").trim();
@@ -66,27 +67,6 @@ const resolveFromManifest = (pathOrUrl: string): string =>
     window.location.origin + THEME_ROOT + "/"
   ).toString();
 
-const resolveAssetByFilename = (fallbackPath: string): string | undefined => {
-  if (!runtimeManifest?.assets) return undefined;
-
-  const fallbackName = normalizeAssetRef(fallbackPath).split("/").pop();
-  if (!fallbackName) return undefined;
-
-  const found = Object.entries(runtimeManifest.assets).find(
-    ([manifestKey, manifestPath]) => {
-      const normalizedKey = normalizeAssetRef(manifestKey).split("/").pop();
-      const normalizedPath = normalizeAssetRef(manifestPath).split("/").pop();
-      return normalizedKey === fallbackName || normalizedPath === fallbackName;
-    }
-  );
-
-  if (!found) return undefined;
-  return appendVersion(
-    resolveFromManifest(found[1]),
-    runtimeManifest.version
-  );
-};
-
 export const loadRuntimeTheme = async (): Promise<LoadedRuntimeTheme | null> => {
   try {
     const manifestResponse = await fetch(MANIFEST_PATH, { cache: "no-store" });
@@ -98,6 +78,7 @@ export const loadRuntimeTheme = async (): Promise<LoadedRuntimeTheme | null> => 
     if (!isManifest(manifestJson)) {
       throw new Error("Invalid manifest shape");
     }
+    latestManifestAssets = { ...manifestJson.assets };
 
     const mergedAssets = {
       ...loadPersistedAssets(),
@@ -145,6 +126,7 @@ export const loadRuntimeTheme = async (): Promise<LoadedRuntimeTheme | null> => 
   } catch (error) {
     runtimeManifest = null;
     runtimeConfig = null;
+    latestManifestAssets = {};
     console.warn(
       `[ThemeLoader] Failed to load theme manifest at ${MANIFEST_PATH}. Falling back to hardcoded defaults.`,
       error
@@ -172,5 +154,20 @@ export const getThemeAssetUrl = (...keys: string[]): string | undefined => {
 
 export const resolveThemeAssetUrl = (
   keys: string[],
-  fallbackPath: string
-): string | undefined => getThemeAssetUrl(...keys) ?? resolveAssetByFilename(fallbackPath);
+  _fallbackPath: string
+): string | undefined => getThemeAssetUrl(...keys);
+
+export const getLatestThemeAssetUrl = (...keys: string[]): string | undefined => {
+  if (!runtimeManifest) return undefined;
+
+  for (const key of keys) {
+    const normalizedKey = normalizeAssetRef(key);
+    const assetPath =
+      latestManifestAssets[key] ?? latestManifestAssets[normalizedKey];
+    if (assetPath) {
+      return appendVersion(resolveFromManifest(assetPath), runtimeManifest.version);
+    }
+  }
+
+  return undefined;
+};

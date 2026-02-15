@@ -50,51 +50,36 @@ export class AssetLoad extends Block {
 
     const bundle = {
       intro_BG: resolveAssetUrl(
-        ["loading-page", "intro_BG", "introBg", "samurai-spin-intro-bg.png"],
+        ["loading-page"],
         "images/samurai-spin-intro-bg.png"
       ),
       dungeon_BG: resolveAssetUrl(
-        ["background", "dungeon_BG", "dungeonBg", "samurai_BG.png"],
+        ["background"],
         "images/samurai_BG.png"
       ),
       game_logo: resolveAssetUrl(
-        ["game-logo", "game_logo", "gameLogo", "samurai-game-logo.png"],
+        ["game-logo"],
         "images/samurai-game-logo.png"
       ),
       game_frame: resolveAssetUrl(
-        ["reel-container", "game_frame", "gameFrame", "Reel-Background.png"],
+        ["reel-container"],
         "images/Reel-Background.png"
       ),
       reel_background: resolveAssetUrl(
-        ["reel-container", "reel_background", "reelBackground", "Reel-Background-620.png"],
+        ["reel-container"],
         "images/Reel-Background-620.png"
       ),
 
       high_symbol_strip: resolveAssetUrl(
-        [
-          "spritesheet",
-          "high_symbol_strip",
-          "highSymbolStrip",
-          "high-symbol-spritesheet.png"
-        ],
+        ["spritesheet"],
         "spritesheets/high-symbol/high-symbol-spritesheet.png"
       ),
       mid_symbol_strip: resolveAssetUrl(
-        [
-          "spritesheet",
-          "mid_symbol_strip",
-          "midSymbolStrip",
-          "mid-symbol-spritesheet.png"
-        ],
+        ["spritesheet"],
         "spritesheets/mid-symbol/mid-symbol-spritesheet.png"
       ),
       low_symbol_strip: resolveAssetUrl(
-        [
-          "spritesheet",
-          "low_symbol_strip",
-          "lowSymbolStrip",
-          "low-symbol-spritesheet.png"
-        ],
+        ["spritesheet"],
         "spritesheets/low-symbol/low-symbol-spritesheet.png"
       ),
       ...(symbolH1 ? { symbol_H1: symbolH1 } : {}),
