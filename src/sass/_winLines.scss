@@ -1,0 +1,32 @@
+.win-line {
+    width: 100px;
+    border: 1px solid #857c7c;
+    margin-top: 17px;
+    margin-right: auto;
+
+    &__container {
+        display: flex;
+        flex-direction: row;
+        flex-basis: space-aroun;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+    }
+
+    &__row {
+        width: 100%;
+        height: 20px;
+        display: flex;
+        flex-direction: row;
+        border: 1px solid #857c7c;
+    }
+
+    &__row-item.--on {
+        background-color: white;
+    }
+
+    &__row-item {
+        width: 25%;
+        background-color: #000000;
+        border: 1px solid #857c7c;
+    }
+}

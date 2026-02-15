@@ -1,0 +1,56 @@
+@font-face {
+  font-family: "urbanist";
+  src: url("../assets/fonts/Urbanist-VariableFont_wght.ttf");
+}
+
+@font-face {
+  font-family: "Lato";
+  src: url("../assets/fonts/Lato-Regular.ttf");
+}
+
+@font-face {
+  font-family: "NicoPaint";
+  src: url("../assets/fonts/NicoPaint-Monospaced.otf") format('truetype');
+}
+
+body {
+  overflow: hidden;
+  background-size: contain;
+  background-position: center;
+  background-color: rgb(31, 31, 31);
+  margin: 0;
+}
+
+* {
+  font-size: 10px;
+  font-family: NicoPaint;
+  box-sizing: border-box;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+}
+
+ul {
+  margin: 0;
+  padding: 1em;
+}
+
+li {
+  font-size: 1em !important;
+}
+
+p,
+li {
+  color: white;
+  font-weight: 400;
+  letter-spacing: 1.4px;
+}
+
+.--hide {
+  display: none !important;
+}

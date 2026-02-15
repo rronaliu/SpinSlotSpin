@@ -1,0 +1,14 @@
+.bank-display__container {
+    display: flex;
+    justify-content: space-evenly;
+    background-color: #e4c7c2;
+    width: 320px;
+    position: absolute;
+    top: 40px;
+    padding: 10px;
+    margin-left: calc(50% - 160px);
+
+    * {
+        font-size: 12px;
+    }
+}

@@ -1,0 +1,108 @@
+.burger-menu {
+    &__burger {
+        width: 35px;
+        height: 35px;
+        background-color: #ffffff66;
+        left: 15px;
+        position: absolute;
+        top: 30px;
+        justify-content: center;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        z-index: 1;
+        border: 1px solid white;
+    }
+
+    &__content {
+        font-size: 1.8em !important;
+        font-family: urbanist;
+        margin: 2em 0 0;
+    }
+
+    &__panel {
+        width: 100%;
+        height: calc(100% - 20px);
+        background-color: rgb(13 11 11 / 90%);
+        position: absolute;
+        overflow-y: scroll;
+        color: white;
+        z-index: 0;
+        top: 20px;
+    }
+
+    &__panel img {
+        width: 4em;
+    }
+
+    &__panel-inner {
+        max-width: 300px;
+        margin: 4vh auto;
+        padding: 2em;
+
+        * {
+            font-size: 1.5em;
+            font-family: 'urbanist';
+        }
+    }
+
+    &__audio-controls {
+        position: absolute;
+        top: 70px;
+        left: 15px;
+        display: flex;
+        gap: 5px;
+        z-index: 1;
+        flex-direction: column;
+    }
+
+    &__audio-toggle {
+        width: 35px;
+        height: 35px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        border-radius: 4px;
+        transition: all 0.2s ease;
+
+        &--muted {
+            background-color: #ff6b6b;
+            color: white;
+        }
+
+        &--unmuted {
+            background-color: #51cf66;
+            color: white;
+        }
+
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
+
+    &__volume-up,
+    &__volume-down {
+        width: 35px;
+        height: 35px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        border-radius: 4px;
+        transition: all 0.2s ease;
+        background-color: #ffcb00;
+        color: white;
+
+        &:hover {
+            transform: scale(1.1);
+        }
+        &:active {
+            background-color: #ff83fb;
+            transform: scale(1.1);
+        }
+    }
+
+}
