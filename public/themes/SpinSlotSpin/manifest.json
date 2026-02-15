@@ -1,0 +1,9 @@
+{
+  "game": "SpinSlotSpin",
+  "version": "20260215204231",
+  "updatedAt": "2026-02-15T20:42:31.983Z",
+  "configPath": "/themes/SpinSlotSpin/game-config.json",
+  "assets": {
+    "high-tier-symbol-1": "/themes/SpinSlotSpin/assets/high-tier-symbol-1.png?v=20260215204231"
+  }
+}
