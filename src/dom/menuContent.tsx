@@ -3,7 +3,7 @@ import WinLine from "./WinLine";
 import { getThemeAssetUrl } from "../theme/runtimeTheme";
 
 const uiImage = (fileName: string): string =>
-  new URL(`../assets/images/UI/${fileName}`, import.meta.url).href;
+  `/themes/SpinSlotSpin/assets/${fileName}`;
 
 const resolveTierMenuImages = (
   themeKeys: [string, string, string],
@@ -36,15 +36,15 @@ export default class MenuContent extends Component {
   render() {
     const [high1, high2, high3] = resolveTierMenuImages(
       ["high-tier-symbol-1", "high-tier-symbol-2", "high-tier-symbol-3"],
-      ["dragon.png", "geisha.png", "helmet.png"]
+      ["high-tier-symbol-1.png", "high-tier-symbol-2.png", "high-tier-symbol-3.png"]
     );
     const [mid1, mid2, mid3] = resolveTierMenuImages(
       ["mid-tier-symbol-1", "mid-tier-symbol-2", "mid-tier-symbol-3"],
-      ["katana.png", "koi.png", "kunai.png"]
+      ["mid-tier-symbol-1.png", "mid-tier-symbol-2.png", "mid-tier-symbol-3.png"]
     );
     const [low1, low2, low3] = resolveTierMenuImages(
       ["low-tier-symbol-1", "low-tier-symbol-2", "low-tier-symbol-3"],
-      ["sakura.png", "coins.png", "lantern.png"]
+      ["low-tier-symbol-1.png", "low-tier-symbol-2.png", "low-tier-symbol-3.png"]
     );
 
     return (

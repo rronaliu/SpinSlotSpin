@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import faviconUrl from './assets/images/samurai-game-logo.png';
 import { applyRuntimeGameConfig, startGame } from './GAME';
 import {
   getRuntimeThemeConfig,
@@ -19,8 +18,8 @@ const setFavicon = (): void => {
   const resolvedFavicon =
     resolveThemeAssetUrl(
       ['game-logo', 'favicon'],
-      'images/samurai-game-logo.png'
-    ) ?? faviconUrl;
+      'game-logo.png'
+    ) ?? '/themes/SpinSlotSpin/assets/game-logo.png';
 
   const existingFavicon = document.querySelector("link[rel='icon']") as HTMLLinkElement | null;
   if (existingFavicon) {

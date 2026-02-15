@@ -5,11 +5,11 @@ import { XContainer } from "../../../pixi/XContainer";
 import { TGraphics } from "../../../pixi/TGraphics";
 import { getThemeAssetUrl, resolveThemeAssetUrl } from "../../../theme/runtimeTheme";
 
-const assetUrl = (path: string): string =>
-  new URL(`../../../assets/${path}`, import.meta.url).href;
+const themeDefaultAssetUrl = (fileName: string): string =>
+  `/themes/SpinSlotSpin/assets/${fileName}`;
 
 const resolveAssetUrl = (keys: string[], fallbackPath: string): string =>
-  resolveThemeAssetUrl(keys, fallbackPath) ?? assetUrl(fallbackPath);
+  resolveThemeAssetUrl(keys, fallbackPath) ?? themeDefaultAssetUrl(fallbackPath);
 
 const resolveThemeOnlyAssetUrl = (keys: string[]): string | undefined =>
   getThemeAssetUrl(...keys);
@@ -51,36 +51,36 @@ export class AssetLoad extends Block {
     const bundle = {
       intro_BG: resolveAssetUrl(
         ["loading-page"],
-        "images/samurai-spin-intro-bg.png"
+        "loading-page.png"
       ),
       dungeon_BG: resolveAssetUrl(
         ["background"],
-        "images/samurai_BG.png"
+        "background.png"
       ),
       game_logo: resolveAssetUrl(
         ["game-logo"],
-        "images/samurai-game-logo.png"
+        "game-logo.png"
       ),
       game_frame: resolveAssetUrl(
         ["reel-container"],
-        "images/Reel-Background.png"
+        "reel-container.png"
       ),
       reel_background: resolveAssetUrl(
         ["reel-container"],
-        "images/Reel-Background-620.png"
+        "reel-container.png"
       ),
 
       high_symbol_strip: resolveAssetUrl(
         ["spritesheet"],
-        "spritesheets/high-symbol/high-symbol-spritesheet.png"
+        "spritesheet.png"
       ),
       mid_symbol_strip: resolveAssetUrl(
         ["spritesheet"],
-        "spritesheets/mid-symbol/mid-symbol-spritesheet.png"
+        "spritesheet.png"
       ),
       low_symbol_strip: resolveAssetUrl(
         ["spritesheet"],
-        "spritesheets/low-symbol/low-symbol-spritesheet.png"
+        "spritesheet.png"
       ),
       ...(symbolH1 ? { symbol_H1: symbolH1 } : {}),
       ...(symbolH2 ? { symbol_H2: symbolH2 } : {}),
