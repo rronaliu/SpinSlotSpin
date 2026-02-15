@@ -1,9 +1,10 @@
 {
   "game": "SpinSlotSpin",
-  "version": "20260215204231",
-  "updatedAt": "2026-02-15T20:42:31.983Z",
+  "version": "20260215211951",
+  "updatedAt": "2026-02-15T21:19:51.734Z",
   "configPath": "/themes/SpinSlotSpin/game-config.json",
   "assets": {
-    "high-tier-symbol-1": "/themes/SpinSlotSpin/assets/high-tier-symbol-1.png?v=20260215204231"
+    "high-tier-symbol-1": "/themes/SpinSlotSpin/assets/high-tier-symbol-1.png?v=20260215204231",
+    "reel-container": "/themes/SpinSlotSpin/assets/reel-container.png?v=20260215211951"
   }
 }
