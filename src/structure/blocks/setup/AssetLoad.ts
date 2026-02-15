@@ -3,9 +3,13 @@ import { Block } from "../../Block";
 import { GAME } from "../../../GAME";
 import { XContainer } from "../../../pixi/XContainer";
 import { TGraphics } from "../../../pixi/TGraphics";
+import { getThemeAssetUrl } from "../../../theme/runtimeTheme";
 
 const assetUrl = (path: string): string =>
   new URL(`../../../assets/${path}`, import.meta.url).href;
+
+const resolveAssetUrl = (keys: string[], fallbackPath: string): string =>
+  getThemeAssetUrl(...keys) ?? assetUrl(fallbackPath);
 
 export class AssetLoad extends Block {
   private progressBar!: TGraphics;
@@ -32,18 +36,39 @@ export class AssetLoad extends Block {
 
   private async _loadAssets(): Promise<void> {
     Assets.addBundle("all-assets", {
-      intro_BG: assetUrl("images/samurai-spin-intro-bg.png"),
-      dungeon_BG: assetUrl("images/samurai_BG.png"),
-      game_logo: assetUrl("images/samurai-game-logo.png"),
-      game_frame: assetUrl("images/Reel-Background.png"),
-      reel_background: assetUrl("images/Reel-Background-620.png"),
+      intro_BG: resolveAssetUrl(
+        ["intro_BG", "introBg", "samurai-spin-intro-bg.png"],
+        "images/samurai-spin-intro-bg.png"
+      ),
+      dungeon_BG: resolveAssetUrl(
+        ["dungeon_BG", "dungeonBg", "samurai_BG.png"],
+        "images/samurai_BG.png"
+      ),
+      game_logo: resolveAssetUrl(
+        ["game_logo", "gameLogo", "samurai-game-logo.png"],
+        "images/samurai-game-logo.png"
+      ),
+      game_frame: resolveAssetUrl(
+        ["game_frame", "gameFrame", "Reel-Background.png"],
+        "images/Reel-Background.png"
+      ),
+      reel_background: resolveAssetUrl(
+        ["reel_background", "reelBackground", "Reel-Background-620.png"],
+        "images/Reel-Background-620.png"
+      ),
 
-      high_symbol_strip:
-        assetUrl("spritesheets/high-symbol/high-symbol-spritesheet.png"),
-      mid_symbol_strip:
-        assetUrl("spritesheets/mid-symbol/mid-symbol-spritesheet.png"),
-      low_symbol_strip:
-        assetUrl("spritesheets/low-symbol/low-symbol-spritesheet.png")
+      high_symbol_strip: resolveAssetUrl(
+        ["high_symbol_strip", "highSymbolStrip", "high-symbol-spritesheet.png"],
+        "spritesheets/high-symbol/high-symbol-spritesheet.png"
+      ),
+      mid_symbol_strip: resolveAssetUrl(
+        ["mid_symbol_strip", "midSymbolStrip", "mid-symbol-spritesheet.png"],
+        "spritesheets/mid-symbol/mid-symbol-spritesheet.png"
+      ),
+      low_symbol_strip: resolveAssetUrl(
+        ["low_symbol_strip", "lowSymbolStrip", "low-symbol-spritesheet.png"],
+        "spritesheets/low-symbol/low-symbol-spritesheet.png"
+      )
     });
 
     // Load assets with progress tracking

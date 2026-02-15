@@ -6,7 +6,7 @@ import GameControlArea from "../../dom/gameControlArea";
 import { CleanUpGame } from "../blocks/game-over/CleanUpGame";
 import { SetSymbolsToReel } from "../blocks/game-ready/SetSymbolsToReel";
 import { AnimateWinlines } from "../blocks/game-over/AnimateWinLines";
-import { winMultipliers } from "../../models/ReelModel";
+import { getActiveWinMultipliers } from "../../models/ReelModel";
 import { WinAmountModal } from "../blocks/game-over/WinAmountModal";
 import { Ticker } from "pixi.js";
 
@@ -113,6 +113,7 @@ export class GameOverState extends State {
     private _awardPayout(): void {
 
         const { bet, result } = this.models;
+        const winMultipliers = getActiveWinMultipliers();
 
         if (result.isWin) {
             let totalWin = 0;

@@ -2,7 +2,7 @@ import { State } from "../State";
 import { gameConfig, GAME } from "../../GAME";
 import { GameState } from "./StateDefinitions";
 import GameControlArea from "../../dom/gameControlArea";
-import { SYMBOLS } from "../../models/ReelModel";
+import { getActiveSymbolIds } from "../../models/ReelModel";
 import { AnimateReels } from "../blocks/spin-result/AnimateReels";
 import { PositionStartOfSpin } from "../blocks/spin-result/PositionStartOfSpin";
 import { SetSymbolsToReel } from "../blocks/game-ready/SetSymbolsToReel";
@@ -65,7 +65,7 @@ export class SpinResultState extends State {
 
     private _generateRandomDisplayRow(): string[] {
 
-        const symbols = Object.values(SYMBOLS);
+        const symbols = getActiveSymbolIds();
         var row = [];
         for (var x = 0; x < 4; x++) {
 
