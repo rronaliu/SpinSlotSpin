@@ -1,7 +1,7 @@
 {
   "game": "SpinSlotSpin",
-  "version": "20260215-local-defaults",
-  "updatedAt": "2026-02-15T00:00:00.000Z",
+  "version": "20260215213837",
+  "updatedAt": "2026-02-15T21:38:37.380Z",
   "configPath": "/themes/SpinSlotSpin/game-config.json",
   "assets": {
     "background": "/themes/SpinSlotSpin/assets/background.png",
@@ -9,7 +9,7 @@
     "game-logo": "/themes/SpinSlotSpin/assets/game-logo.png",
     "loading-page": "/themes/SpinSlotSpin/assets/loading-page.png",
     "spritesheet": "/themes/SpinSlotSpin/assets/spritesheet.png",
-    "low-tier-symbol-1": "/themes/SpinSlotSpin/assets/low-tier-symbol-1.png",
+    "low-tier-symbol-1": "/themes/SpinSlotSpin/assets/low-tier-symbol-1.png?v=20260215213837",
     "low-tier-symbol-2": "/themes/SpinSlotSpin/assets/low-tier-symbol-2.png",
     "low-tier-symbol-3": "/themes/SpinSlotSpin/assets/low-tier-symbol-3.png",
     "mid-tier-symbol-1": "/themes/SpinSlotSpin/assets/mid-tier-symbol-1.png",
